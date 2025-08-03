@@ -2,40 +2,84 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Demorou pra poha pra fzr isso lice</title>
+  <title>Pedido pra Lice</title>
   <style>
     body {
-      background-color: black;
+      background-color: red;
       color: white;
       font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 50px;
+      margin: 0;
+      overflow: hidden;
     }
+
+    #titulo {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 14px;
+      opacity: 0.6;
+    }
+
+    .container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      z-index: 1;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 40px;
+    }
+
     button {
       background-color: white;
-      color: black;
-      padding: 10px 20px;
-      margin: 10px;
+      color: red;
+      padding: 15px 25px;
+      font-size: 1.2em;
+      margin: 15px;
       border: none;
+      border-radius: 8px;
       cursor: pointer;
-      position: absolute;
+      transition: 0.3s ease;
+      position: relative;
     }
-    #sim {
-      left: 50%;
-      transform: translateX(-50%);
-      position: static;
-    }
+
     #mensagem {
       margin-top: 30px;
-      font-size: 1.5em;
+      font-size: 1.4em;
+      max-width: 90%;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
     }
   </style>
 </head>
 <body>
-  <h1>Demorou pra poha pra fzr isso lice</h1>
-  <button id="sim">Sim</button>
-  <button id="nao">Não</button>
-  <div id="mensagem"></div>
+
+  <canvas id="fundo"></canvas>
+
+  <div id="titulo">Demorou pra poha pra fzr isso lice</div>
+
+  <div class="container">
+    <h1>Quer namorar cmg?? 🥺</h1>
+    <button id="sim">Sim</button>
+    <button id="nao">Não</button>
+    <div id="mensagem"></div>
+  </div>
+
+  <audio autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+  </audio>
 
   <script>
     const btnSim = document.getElementById("sim");
@@ -43,15 +87,52 @@
     const mensagem = document.getElementById("mensagem");
 
     btnSim.addEventListener("click", () => {
-      mensagem.textContent = "Gostosaaaaa te amo e denada pelo livre arbítrio";
+      mensagem.textContent = "Pronto, agr para de seguir todo mundo e volta com a aliança na bio q eu vou q vc tirou 👹🔪";
     });
 
-    btnNao.addEventListener("mouseover", () => {
+    btnNao.addEventListener("click", () => {
       const x = Math.floor(Math.random() * (window.innerWidth - btnNao.offsetWidth));
       const y = Math.floor(Math.random() * (window.innerHeight - btnNao.offsetHeight));
+      btnNao.style.position = "absolute";
       btnNao.style.left = x + "px";
       btnNao.style.top = y + "px";
     });
+
+    // Corações animados
+    const canvas = document.getElementById("fundo");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const hearts = [];
+    for (let i = 0; i < 50; i++) {
+      hearts.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 10 + 5,
+        speed: Math.random() * 1 + 0.5
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let heart of hearts) {
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(255,255,255,0.6)";
+        ctx.moveTo(heart.x, heart.y);
+        ctx.arc(heart.x, heart.y, heart.size, 0, Math.PI * 2);
+        ctx.fill();
+        heart.y -= heart.speed;
+        if (heart.y < -heart.size) {
+          heart.y = canvas.height + heart.size;
+          heart.x = Math.random() * canvas.width;
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+
+    draw();
   </script>
+
 </body>
 </html>
