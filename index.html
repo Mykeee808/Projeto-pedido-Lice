@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Demorou pra poha pra fzr isso lice</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    button {
+      background-color: white;
+      color: black;
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      cursor: pointer;
+      position: absolute;
+    }
+    #sim {
+      left: 50%;
+      transform: translateX(-50%);
+      position: static;
+    }
+    #mensagem {
+      margin-top: 30px;
+      font-size: 1.5em;
+    }
+  </style>
+</head>
+<body>
+  <h1>Demorou pra poha pra fzr isso lice</h1>
+  <button id="sim">Sim</button>
+  <button id="nao">Não</button>
+  <div id="mensagem"></div>
+
+  <script>
+    const btnSim = document.getElementById("sim");
+    const btnNao = document.getElementById("nao");
+    const mensagem = document.getElementById("mensagem");
+
+    btnSim.addEventListener("click", () => {
+      mensagem.textContent = "Gostosaaaaa te amo e denada pelo livre arbítrio";
+    });
+
+    btnNao.addEventListener("mouseover", () => {
+      const x = Math.floor(Math.random() * (window.innerWidth - btnNao.offsetWidth));
+      const y = Math.floor(Math.random() * (window.innerHeight - btnNao.offsetHeight));
+      btnNao.style.left = x + "px";
+      btnNao.style.top = y + "px";
+    });
+  </script>
+</body>
+</html>
